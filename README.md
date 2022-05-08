@@ -2,7 +2,7 @@
 ## DDC 2022
 ###### Skrevet af ketamin 07-05-2022
 ---
-##### Description
+#### Description
 Sværhedsgrad: **Medium**
 
 Hemmelighedernessss kammer er åbnet igen, men hvisss du vil ind, ssssskal du forbi mig førssssst!
@@ -10,7 +10,7 @@ Hemmelighedernessss kammer er åbnet igen, men hvisss du vil ind, ssssskal du fo
 nc chamber-of-secretssss.hkn 55555
 ```
 
-##### Writeup
+#### Writeup
 Det første vi bliver mødt med, er to valgmuligheder
 ```term
 What would you like to do?
@@ -204,7 +204,7 @@ Good luck underssstanding it, it'sssss in parsssseltongue:
         >>  328 LOAD_CONST               0 (None)
             330 RETURN_VALUE
 ```
-Dette må være den måde serveren tjekker om adgangskoden er korrekt. Dette ligner [Python Disassembly](https://docs.python.org/3/library/dis.html). En analyse af relevante tjek ville kunne fortælle os hvad adgangskoden er.
+Dette må være den måde serveren tjekker om adgangskoden er korrekt. Dette ligner [Python Disassembly](https://docs.python.org/3/library/dis.html). En analyse af dette ville kunne fortælle os hvad adgangskoden er.
 
 **Første tjek**
 ```term
@@ -255,7 +255,7 @@ DDC{----------------------------------}
              52 LOAD_ASSERTION_ERROR
              54 RAISE_VARARGS
 ```
-En undersøgelse af BINARY_SUBSCR viser at der tjekkes om index 21 af codeword er lig med 'd'.
+En undersøgelse af BINARY_SUBSCR viser, at der tjekkes om index 21 af codeword er lig med 'd'.
 ```term
 DDC{-----------------d----------------}
 ```
@@ -311,7 +311,7 @@ DDC{----h4v3---------d-my-------------}
             160 LOAD_ASSERTION_ERROR
             162 RAISE_VARARGS            1
 ```
-Laver et string slice af codeword (codeword[6:3:-1]) og tjekker om 'u0y'. Bemærk -1 i slice.
+Laver et string slice af codeword (codeword[6:3:-1]) og tjekker om dette er lig med 'u0y'. Bemærk -1 i slice.
 ```term
 DDC{y0u-h4v3---------d-my-------------}
 ```
@@ -328,7 +328,7 @@ DDC{y0u-h4v3---------d-my-------------}
             180 LOAD_ASSERTION_ERROR
             182 RAISE_VARARGS            1
 ```
-Tjekker om codewords index 37 og 26 er ens. 
+Tjekker om codewords index 37 og 26 er ens. Vi ved dog ikke hvad disse to er lig med endnu.
 ```term
 DDC{y0u-h4v3---------d-my-x----------x}
 ```
@@ -351,7 +351,7 @@ DDC{y0u-h4v3---------d-my-x----------x}
             212 LOAD_ASSERTION_ERROR
             214 RAISE_VARARGS            1
 ```
-Denher er lidt tricky. Efter lidt afprøvning findes det frem til at der tjekkes om 'sS5' optræder i stringslicet [28:37] ligeså mange gange som tallet der står på index 27. Eftersom stringslicet er 9 karakter langt, giver det mening at der skal stå 3 på index 27's pads og 'sS5sS5sS5' i slicet.
+Den her er lidt tricky. Efter lidt afprøvning findes det frem til at der tjekkes om 'sS5' optræder i stringslicet [28:37] ligeså mange gange som tallet der står på index 27. Eftersom stringslicet er 9 karakter langt, giver det mening at der skal stå 3 på index 27's pads og 'sS5sS5sS5' i slicet. 
 ```term
 DDC{y0u-h4v3---------d-my-x-sS5sS5sS5x}
 ```
@@ -377,7 +377,7 @@ DDC{y0u-h4v3---------d-my-x-sS5sS5sS5x}
             250 RAISE_VARARGS            1
 ```
 
-Kører ord() på index 26 af og tjekker om den er imellem 115 og 117 dvs. 116 hvis du nu skulle være i tvivl. Dette svarer til 't'.
+Kører ord() på index 26 af og tjekker om det er imellem 115 og 117 dvs. 116 hvis du nu skulle være i tvivl. Dette svarer til 't'.
 ```term
 DDC{y0u-h4v3---------d-my-t3sS5sS5sS5t}
 ```

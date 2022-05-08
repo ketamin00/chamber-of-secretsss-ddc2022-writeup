@@ -204,7 +204,7 @@ Good luck underssstanding it, it'sssss in parsssseltongue:
         >>  328 LOAD_CONST               0 (None)
             330 RETURN_VALUE
 ```
-Dette må være den måde serveren tjekker om adgangskoden er korrekt. Dette ligner [Python Disassembly](https://docs.python.org/3/library/dis.html). En analyse af dette ville kunne fortælle os hvad adgangskoden er.
+Dette må være den måde serveren tjekker om adgangskoden er korrekt. Dette ligner [Python Bytecode](https://docs.python.org/3/library/dis.html). En analyse af dette ville kunne fortælle os hvad adgangskoden er.
 
 **Første tjek**
 ```term
